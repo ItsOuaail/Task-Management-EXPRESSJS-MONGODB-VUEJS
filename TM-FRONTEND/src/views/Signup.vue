@@ -1,10 +1,10 @@
 <template>
-	<div class="section">
+	<div class="section1">
 		<div class="container">
 			<div class="row full-height justify-content-center">
 				<div class="col-12 text-center align-self-center py-5">
 					<div class="section pb-5 pt-5 pt-sm-2 text-center">
-						<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+						<h6 class="center1 mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
 			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
 			          	<label for="reg-log"></label>
 						<div class="card-3d-wrap mx-auto">
@@ -98,10 +98,20 @@ h6 span {
 	text-transform: uppercase;
 	font-weight: 700;
 }
+.center1 {
+    text-align: center;
+}
 .section {
 	position: relative;
 	width: 100%;
 	display: block;
+}
+.section1 {
+    background: rgb(121,121,120);
+background: -moz-radial-gradient(circle, rgba(121,121,120,1) 0%, rgba(155,155,124,1) 41%, rgba(255,255,187,1) 100%);
+background: -webkit-radial-gradient(circle, rgba(121,121,120,1) 0%, rgba(155,155,124,1) 41%, rgba(255,255,187,1) 100%);
+background: radial-gradient(circle, rgba(121,121,120,1) 0%, rgba(155,155,124,1) 41%, rgba(255,255,187,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#797978",endColorstr="#ffffbb",GradientType=1);
 }
 .full-height {
 	min-height: 100vh;
@@ -132,7 +142,7 @@ h6 span {
 	height: 36px;
 	border-radius: 50%;
 	color: #ffeba7;
-	background-color: #102770;
+	background-color: #323434;
 	font-family: 'unicons';
 	content: '\\'; /* Updated Unicode for icon */
 	z-index: 20;
@@ -292,10 +302,10 @@ h6 span {
 }
 
 .btn {
-	border-radius: 4px;
-	height: 44px;
+	border-radius: 1rem;
+	height: 3rem;
 	font-size: 13px;
-	font-weight: 600;
+	font-weight: 500;
 	text-transform: uppercase;
 	-webkit-transition: all 200ms linear;
 	transition: all 200ms linear;
@@ -318,6 +328,7 @@ h6 span {
 	background-color: #ffeba7;
 	color: #102770;
 	box-shadow: 0 8px 24px 0 rgba(255, 235, 167, .2);
+    transition: .7s ease;
 }
 .btn:active,
 .btn:focus {
@@ -326,9 +337,11 @@ h6 span {
 	box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
 }
 .btn:hover {
-	background-color: #102770;
+	background-color: #252626;
 	color: #ffeba7;
 	box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
+    transform: scale(1.03);
+    box-shadow: 0 2px 4px rgba(186, 185, 113, 0.311);
 }
 
 .logo {
