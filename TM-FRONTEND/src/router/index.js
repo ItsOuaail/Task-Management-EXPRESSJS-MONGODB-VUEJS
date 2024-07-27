@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Signup from '../views/Signup.vue'
 import LandingPage from '../views/LandingPage.vue'
+import Confirm from '../views/Confirm.vue'
 //import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/',
       name: 'LandingPage',
       component: LandingPage
+    },
+    {
+      path: '/confirm',
+      name: 'Confirm',
+      component: Confirm
     },
     /*{
       path: '/about',
