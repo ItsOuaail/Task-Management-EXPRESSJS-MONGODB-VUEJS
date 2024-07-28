@@ -22,6 +22,7 @@
                       <h4 class="mb-4 pb-3">Log In</h4>
                       <div class="form-group">
                         <input
+                        v-model="usernamel"
                           type="text"
                           name="logname"
                           class="form-style"
@@ -33,6 +34,7 @@
                       </div>
                       <div class="form-group mt-2">
                         <input
+                        v-model="passwordl"
                           type="password"
                           name="logpass"
                           class="form-style"
@@ -42,7 +44,7 @@
                         />
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
-                      <a href="#" class="btn mt-4">submit</a>
+                      <a href="#" class="btn mt-4" @click="handelLogin">submit</a>
                       <p class="mb-0 mt-4 text-center">
                         <a href="#0" class="link">Forgot your password?</a>
                       </p>
@@ -126,10 +128,14 @@ export default {
       email: "",
       numero: "",
       password: "",
+      usernamel: "",
+      passwordl: "",
+      error: null
     };
   },
   methods: {
     ...mapActions(["signup"]),
+    ...mapActions(["login"]),
     async handleSignup() {
       const userData = {
         username: this.username,
@@ -145,6 +151,20 @@ export default {
         console.error("Signup failed:", error);
       }
     },
+    async handelLogin() {
+      const credentials = {
+          username: this.usernamel,
+          password: this.passwordl
+      };
+      try {
+        console.log(credentials);
+        await this.login(credentials);
+        this.$router.push("/");
+        
+      } catch (err) {
+        this.error = 'Login failed. Please check your credentials and try again.';
+      }
+    }
   },
 };
 </script>
