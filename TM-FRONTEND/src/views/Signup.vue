@@ -28,7 +28,7 @@
                           class="form-style"
                           placeholder="Your Username"
                           id="logname"
-                          autocomplete="off"
+                          autocomplete="off" required
                         />
                         <i class="input-icon uil uil-user"></i>
                       </div>
@@ -40,8 +40,9 @@
                           class="form-style"
                           placeholder="Your Password"
                           id="logpass"
-                          autocomplete="off"
+                          autocomplete="off" required
                         />
+                        <div class="err">{{ errorr }}</div>
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
                       <a href="#" class="btn mt-4" @click="handelLogin">submit</a>
@@ -103,6 +104,7 @@
                         />
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
+                      <div class="err">{{ errorrS }}</div>
                       <a href="#" class="btn mt-4" @click="handleSignup"
                         >submit</a
                       >
@@ -130,7 +132,8 @@ export default {
       password: "",
       usernamel: "",
       passwordl: "",
-      error: null
+      errorr: null,
+      errorrS: null
     };
   },
   methods: {
@@ -148,7 +151,8 @@ export default {
         await this.signup(userData);
         this.$router.push("/confirm");
       } catch (error) {
-        console.error("Signup failed:", error);
+        this.errorrS = error.response.data.error;
+        console.error("Signup failed:", error.response.data.error );
       }
     },
     async handelLogin() {
@@ -157,12 +161,12 @@ export default {
           password: this.passwordl
       };
       try {
-        console.log(credentials);
         await this.login(credentials);
         this.$router.push("/");
         
-      } catch (err) {
-        this.error = 'Login failed. Please check your credentials and try again.';
+      } catch (error) {
+        this.errorr = error.response.data.error;
+        console.error("login failed:", error.response.data.error);
       }
     }
   },
@@ -481,6 +485,9 @@ h6 span {
   width: auto;
   display: block;
 }
-</style>import { mapGetters } from 'vuex';
-import { data } from 'autoprefixer';
+
+.err{
+  color: red;
+}
+</style>
 

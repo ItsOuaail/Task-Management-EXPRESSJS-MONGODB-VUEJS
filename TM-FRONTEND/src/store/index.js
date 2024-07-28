@@ -17,14 +17,12 @@ const store = createStore({
   },
   actions: {
     async login({ commit }, credentials) {
-      try {
+
         const response = await axios.post('/auth/login', credentials);
         commit('setUser', response.data.user);
         Cookies.set('token', response.data.token, { expires: 7 }); // Token expires in 7 days
         axios.defaults.headers.common['x-auth-token'] = response.data.token;
-      } catch (error) {
-        throw new Error('Failed to login');
-      }
+        console.log(response)
     },
     async fetchTasks({ commit }) {
       const response = await axios.get('/tasks');
