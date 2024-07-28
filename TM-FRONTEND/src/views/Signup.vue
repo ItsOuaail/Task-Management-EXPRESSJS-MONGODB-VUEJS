@@ -22,27 +22,30 @@
                       <h4 class="mb-4 pb-3">Log In</h4>
                       <div class="form-group">
                         <input
+                        v-model="usernamel"
                           type="text"
                           name="logname"
                           class="form-style"
                           placeholder="Your Username"
                           id="logname"
-                          autocomplete="off"
+                          autocomplete="off" required
                         />
                         <i class="input-icon uil uil-user"></i>
                       </div>
                       <div class="form-group mt-2">
                         <input
+                        v-model="passwordl"
                           type="password"
                           name="logpass"
                           class="form-style"
                           placeholder="Your Password"
                           id="logpass"
-                          autocomplete="off"
+                          autocomplete="off" required
                         />
+                        <div class="err">{{ errorr }}</div>
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
-                      <a href="#" class="btn mt-4">submit</a>
+                      <a href="#" class="btn mt-4" @click="handelLogin">submit</a>
                       <p class="mb-0 mt-4 text-center">
                         <a href="#0" class="link">Forgot your password?</a>
                       </p>
@@ -101,6 +104,7 @@
                         />
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
+                      <div class="err">{{ errorrS }}</div>
                       <a href="#" class="btn mt-4" @click="handleSignup"
                         >submit</a
                       >
@@ -126,10 +130,15 @@ export default {
       email: "",
       numero: "",
       password: "",
+      usernamel: "",
+      passwordl: "",
+      errorr: null,
+      errorrS: null
     };
   },
   methods: {
     ...mapActions(["signup"]),
+    ...mapActions(["login"]),
     async handleSignup() {
       const userData = {
         username: this.username,
@@ -142,9 +151,24 @@ export default {
         await this.signup(userData);
         this.$router.push("/confirm");
       } catch (error) {
-        console.error("Signup failed:", error);
+        this.errorrS = error.response.data.error;
+        console.error("Signup failed:", error.response.data.error );
       }
     },
+    async handelLogin() {
+      const credentials = {
+          username: this.usernamel,
+          password: this.passwordl
+      };
+      try {
+        await this.login(credentials);
+        this.$router.push("/");
+        
+      } catch (error) {
+        this.errorr = error.response.data.error;
+        console.error("login failed:", error.response.data.error);
+      }
+    }
   },
 };
 </script>
@@ -461,6 +485,9 @@ h6 span {
   width: auto;
   display: block;
 }
-</style>import { mapGetters } from 'vuex';
-import { data } from 'autoprefixer';
+
+.err{
+  color: red;
+}
+</style>
 
