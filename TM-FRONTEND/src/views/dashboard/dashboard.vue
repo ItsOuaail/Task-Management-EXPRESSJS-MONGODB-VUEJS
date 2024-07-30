@@ -8,10 +8,10 @@
         ]"
       >
         <div
-          class="test flex h-screen flex-col justify-between pt-2 pb-6 bg-white"
+          class="test flex h-screen flex-col justify-between pt-2 pb-6 bg-white "
         >
           <div>
-            <div class="flex">
+            <div class="flex ">
               <button @click="toggleSidebar" class="p-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -19,19 +19,19 @@
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6"
+                  class="size-6 text-white"
                 >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+                    d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" 
                   />
                 </svg>
               </button>
               <a
                 href="#"
                 aria-label="dashboard"
-                class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600"
+                class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600 "
               >
                 <div style="width: 37px; height: 37px; margin-top: 10px">
                   <img src="" alt="" />
@@ -49,7 +49,7 @@
                 <a
                   href="#"
                   aria-label="dashboard"
-                  class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600"
+                  class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-white"
                 >
                   <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
                     <svg
@@ -58,7 +58,7 @@
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="size-6"
+                      class="size-6 group-hover:text-amber-300"
                     >
                       <path
                         stroke-linecap="round"
@@ -67,7 +67,7 @@
                       />
                     </svg>
                   </svg>
-                  <span class="group-hover:text-gray-700">
+                  <span class="group-hover:text-amber-300">
                     <router-link to="/offre">Dashboard</router-link>
                   </span>
                 </a>
@@ -76,7 +76,7 @@
                 <a
                   href="#"
                   aria-label="dashboard"
-                  class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600"
+                  class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-white"
                 >
                   <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
                     <svg
@@ -85,7 +85,7 @@
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="size-6"
+                      class="size-6 group-hover:text-amber-300"
                     >
                       <path
                         stroke-linecap="round"
@@ -94,7 +94,7 @@
                       />
                     </svg>
                   </svg>
-                  <span class="group-hover:text-gray-700">
+                  <span class="text-white group-hover:text-amber-300">
                     <router-link to="/offre">Projects</router-link>
                   </span>
                 </a>
@@ -102,7 +102,7 @@
               <li class="min-w-max">
                 <a
                   href="#"
-                  class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600"
+                  class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-white"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,7 @@
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="size-6"
+                      class="size-6 group-hover:text-amber-300"
                     >
                       <path
                         stroke-linecap="round"
@@ -125,7 +125,7 @@
                       />
                     </svg>
                   </svg>
-                  <span class="group-hover:text-gray-700">
+                  <span class="group-hover:text-amber-300">
                     <router-link to="/atelier">Tasks</router-link>
                   </span>
                 </a>
@@ -133,7 +133,7 @@
               <li class="min-w-max">
                 <a
                   href="#"
-                  class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
+                  class="group flex items-center space-x-4 rounded-md px-4 py-3 text-white"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +147,7 @@
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="size-6"
+                      class="size-6 group-hover:text-amber-300"
                     >
                       <path
                         stroke-linecap="round"
@@ -156,7 +156,7 @@
                       />
                     </svg>
                   </svg>
-                  <span class="group-hover:text-gray-700">
+                  <span class="group-hover:text-amber-300">
                     <router-link to="/inscription">Calendar</router-link>
                   </span>
                 </a>
@@ -165,11 +165,11 @@
               <li class="min-w-max">
                 <a
                   href="#"
-                  class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
+                  class="group flex items-center space-x-4 rounded-md px-4 py-3 text-white"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 group-hover:text-selected"
+                    class="h-5 w-5 group-hover:text-amber-300 "
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -179,7 +179,7 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                  <span class="group-hover:text-gray-700">
+                  <span class="group-hover:text-amber-300">
                     <router-link to="/packs">settings</router-link>
                   </span>
                 </a>
@@ -198,7 +198,7 @@
           <div class="w-max -mb-3">
             <a
               href="#"
-              class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
+              class="group flex items-center space-x-4 rounded-md px-4 py-3 text-white"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -212,7 +212,7 @@
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6"
+                  class="size-6 group-hover:text-amber-300"
                 >
                   <path
                     stroke-linecap="round"
@@ -221,7 +221,7 @@
                   />
                 </svg>
               </svg>
-              <span class="group-hover:text-gray-700">
+              <span class="group-hover:text-amber-300">
                 <a @click.prevent="logout">Déconnexion</a>
               </span>
             </a>
@@ -259,11 +259,11 @@ export default {
 
 <style scoped>
 .test {
-  background: rgb(157,155,128);
-background: -moz-linear-gradient(183deg, rgba(157,155,128,1) 0%, rgba(157,155,128,0.795999649859944) 63%, rgba(158,158,151,1) 100%);
-background: -webkit-linear-gradient(183deg, rgba(157,155,128,1) 0%, rgba(157,155,128,0.795999649859944) 63%, rgba(158,158,151,1) 100%);
-background: linear-gradient(183deg, rgba(157,155,128,1) 0%, rgba(157,155,128,0.795999649859944) 63%, rgba(158,158,151,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#9d9b80",endColorstr="#9e9e97",GradientType=1);
+  background: rgb(27,27,25);
+background: -moz-linear-gradient(103deg, rgba(27,27,25,1) 0%, rgba(15,14,3,1) 18%, rgba(1,1,1,1) 100%);
+background: -webkit-linear-gradient(103deg, rgba(27,27,25,1) 0%, rgba(15,14,3,1) 18%, rgba(1,1,1,1) 100%);
+background: linear-gradient(103deg, rgba(27,27,25,1) 0%, rgba(15,14,3,1) 18%, rgba(1,1,1,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1b1b19",endColorstr="#010101",GradientType=1);
 }
 .image img {
   margin-left: -3.5rem;
