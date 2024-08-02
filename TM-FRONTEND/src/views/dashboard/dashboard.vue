@@ -1,12 +1,14 @@
 <template>
-  <div class="min-h-screen bg-custom-color">
+  <div class="testt min-h-screen bg-custom-color">
     <div class="flex">
+      
       <div
         :class="[
           'sidebar min-h-screen w-[3.35rem] overflow-hidden border-r',
-          isSidebarOpen ? 'w-56' : 'w-[13.35rem]',
+          isSidebarOpen ? 'w-56' : 'w-[14.35rem]',
         ]"
       >
+      
         <div
           class="test flex h-screen flex-col justify-between pt-2 pb-6 bg-white "
         >
@@ -28,6 +30,7 @@
                   />
                 </svg>
               </button>
+              
               <a
                 href="#"
                 aria-label="dashboard"
@@ -38,7 +41,7 @@
                 </div>
                 <div class="image" style="width: 130px; height: 30px">
                   <router-link to="/test"
-                    ><img src="/public/img/prioritize.png" alt=""
+                    ><img src="/public/img/prioritize (2).png" alt=""
                   /></router-link>
                 </div>
               </a>
@@ -68,7 +71,7 @@
                     </svg>
                   </svg>
                   <span class="group-hover:text-amber-300">
-                    <router-link to="/offre">Dashboard</router-link>
+                    <router-link to="/dashboard">Dashboard</router-link>
                   </span>
                 </a>
               </li>
@@ -87,15 +90,14 @@
                       stroke="currentColor"
                       class="size-6 group-hover:text-amber-300"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                      />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                    
                     </svg>
                   </svg>
                   <span class="text-white group-hover:text-amber-300">
-                    <router-link to="/offre">Projects</router-link>
+                    <router-link to="/offre">Profil</router-link>
                   </span>
                 </a>
               </li>
@@ -126,7 +128,7 @@
                     </svg>
                   </svg>
                   <span class="group-hover:text-amber-300">
-                    <router-link to="/atelier">Tasks</router-link>
+                    <router-link to="/tasks">Tasks</router-link>
                   </span>
                 </a>
               </li>
@@ -228,13 +230,18 @@
           </div>
         </div>
       </div>
+      
       <section
         class="flex flex-col justify-center max-w-6xl min-h-screen px-4 py-10 mx-auto sm:px-6 bg-custom-color"
       >
         <RouterView />
+        
       </section>
+      
     </div>
+    
   </div>
+  
 </template>
 <script>
 export default {
@@ -259,17 +266,26 @@ export default {
 
 <style scoped>
 .test {
+  
   background: rgb(27,27,25);
 background: -moz-linear-gradient(103deg, rgba(27,27,25,1) 0%, rgba(15,14,3,1) 18%, rgba(1,1,1,1) 100%);
 background: -webkit-linear-gradient(103deg, rgba(27,27,25,1) 0%, rgba(15,14,3,1) 18%, rgba(1,1,1,1) 100%);
 background: linear-gradient(103deg, rgba(27,27,25,1) 0%, rgba(15,14,3,1) 18%, rgba(1,1,1,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1b1b19",endColorstr="#010101",GradientType=1);
 }
+
+
 .image img {
   margin-left: -3.5rem;
   height: 3rem;
   width: 5rem;
   margin-top: -0.5rem;
+}
+.image1 img {
+  margin-top: -.5rem;
+  height: 3rem;
+  width: 5rem;
+  
 }
 .bg-gradient-selected {
   background-color: #a3b18a; /* Utilisez la même couleur personnalisée ici */
@@ -324,4 +340,5 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1b1b19",endCo
   margin-left: -5%;
   margin-top: 19%;
 }
+
 </style>
