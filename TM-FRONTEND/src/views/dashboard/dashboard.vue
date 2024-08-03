@@ -4,8 +4,8 @@
       
       <div
         :class="[
-          'sidebar min-h-screen w-[3.35rem] overflow-hidden border-r',
-          isSidebarOpen ? 'w-56' : 'w-[14.35rem]',
+          'sidebar min-h-screen w-[13.35rem] overflow-hidden border-r',
+          isSidebarOpen ? 'w-56' : 'w-[3rem]',
         ]"
       >
       
@@ -224,7 +224,7 @@
                 </svg>
               </svg>
               <span class="group-hover:text-amber-300">
-                <a @click.prevent="logout">Déconnexion</a>
+                <a @click.prevent="logout">Logout</a>
               </span>
             </a>
           </div>
@@ -248,7 +248,7 @@ export default {
   name: "sideBar",
   data() {
     return {
-      isSidebarOpen: false,
+      isSidebarOpen: true,
     };
   },
   methods: {

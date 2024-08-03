@@ -1,4 +1,9 @@
 <template>
+  <div v-if="showSuccessMessage" class="success-message p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+    <span class="font-medium">Task added successfully!</span>
+  </div>
+  
+  
   <div
     class="today h-screen w-full dark:bg-gray-700 flex justify-center items-center"
   >
@@ -40,7 +45,7 @@
               <dd
                 class="mt-1 text-3xl leading-9 font-semibold text-indigo-600 dark:text-indigo-400"
               >
-                8
+                {{ tasks.length }}
               </dd>
             </dl>
           </div>
@@ -72,9 +77,9 @@
     My list :
   </h2>
 
-  <div class="overflow-y-auto h-32 ... tab1 overflow-x-auto">
+  <div class="tabll overflow-scroll tab1   overflow-x-auto">
     <table class="table table-s">
-      <thead>
+      <thead >
         <tr>
           <th>Title</th>
           <th>Description</th>
@@ -82,56 +87,35 @@
           <th>Category</th>
           <th>Priority</th>
           <th>Completed</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Cy Ganderton</td>
-          <td>Quality Control Specialist</td>
-          <td>Littel, Schaden and Vandervort</td>
-          <td>Canada</td>
-          <td>12/16/2020</td>
-          <td>Blue</td>
-        </tr>
-        <tr>
-          <td>Hart Hagerty</td>
-          <td>Desktop Support Technician</td>
-          <td>Zemlak, Daniel and Leannon</td>
-          <td>United States</td>
-          <td>12/5/2020</td>
-          <td>Purple</td>
-        </tr>
-        <tr>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Carroll Group</td>
-          <td>China</td>
-          <td>8/15/2020</td>
-          <td>Red</td>
-        </tr>
-        <tr>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Carroll Group</td>
-          <td>China</td>
-          <td>8/15/2020</td>
-          <td>Red</td>
-        </tr>
-        <tr>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Carroll Group</td>
-          <td>China</td>
-          <td>8/15/2020</td>
-          <td>Red</td>
-        </tr>
-        <tr>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Carroll Group</td>
-          <td>China</td>
-          <td>8/15/2020</td>
-          <td>Red</td>
+        <tr v-for="task in tasks" :key="task._id">
+          <td>{{ task.title }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.dueDate }}</td>
+          <td>{{ task.category }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.completed }}</td>
+          <td>
+            <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2">
+                <svg @click="DeleteTask(task._id)" class="h-6 w-6 text-gray-400 cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z"/>
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+                <svg class="h-6 w-6 text-gray-400 cursor-pointer" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z"/>
+                  <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"/>
+                  <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"/>
+                  <line x1="16" y1="5" x2="19" y2="8"/>
+                </svg>
+              </div>
+            </div>
+          </td>
+          
         </tr>
       </tbody>
     </table>
@@ -141,8 +125,8 @@
     class="add relative inline-block p-px font-semibold leading-6 text-indigo-600 cursor-pointer group rounded-xl"
   >
     <div class="relative z-10 flex items-center px-6 py-3 space-x-2 rounded-xl">
-      <span>Add a Task</span>
-      <svg
+      <span onclick="my_modal_1.showModal()">Add a Task</span
+      ><svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
@@ -156,43 +140,88 @@
           clip-rule="evenodd"
         ></path>
       </svg>
+      <!-- Open the modal using ID.showModal() method -->
+
+      <dialog id="my_modal_1" class="modal">
+        <AddTaskVue @task-added="handleTaskAdded" />
+      </dialog>
     </div>
   </button>
+  
+  <ConfirmDelete
+      v-if="showConfirmDialog"
+      @confirm="confirmDelete"
+      @cancel="cancelDelete"
+    />
+  
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import AddTaskVue from "./AddTask.vue";
+import ConfirmDelete from "./ConfirmDelete.vue";
+
 export default {
+  name: "TaskList",
+  components: {
+    AddTaskVue,
+    ConfirmDelete,
+  },
   data() {
     return {
-      tasks: []
-    }
+      showSuccessMessage: false,
+      showConfirmDialog: false,
+      taskToDelete: null,
+    };
   },
-  mounted (){
-    this.getTasks();
+  computed: {
+    ...mapGetters(["tasks"]),
+  },
+  created() {
+    this.$store.dispatch("fetchTasks");
   },
   methods: {
-    ...mapActions(['fetchTasks']),
-    async getTasks() {
+    handleTaskAdded() {
+      this.showSuccessMessage = true;
+      setTimeout(() => {
+        this.showSuccessMessage = false;
+      }, 3000); // Hide the message after 3 seconds
+    },
+    ...mapActions(['deleteTask']),
+    async DeleteTask (id) {
+      this.taskToDelete = id;
+      this.showConfirmDialog = true;
+    },
+    async confirmDelete() {
       try {
-        const response = await this.fetchTasks();
-        this.tasks = response;
-        console.log(response);
+        await this.deleteTask(this.taskToDelete);
+        this.taskToDelete = null;
+        this.showConfirmDialog = false;
       } catch (error) {
-        console.error("fetching tasks  failed:", error.response.data.error );
-        console.log(error.response.data)
+        console.error("Deleting failed:", error.response);
       }
-
+    },
+    cancelDelete() {
+      this.taskToDelete = null;
+      this.showConfirmDialog = false;
     }
   }
-}
-
-
+};
 </script>
 
 
 
 
-<style>
+<style scoped>
+.success-message {
+  margin-top: -5.6rem;
+  width: 40rem;
+  align-items: center;
+  text-align: center;
+}
+.tabll{
+  width: 55rem;
+  height: 10rem;
+}
 .add {
   margin-left: 81%;
   text-decoration: underline;
@@ -200,9 +229,10 @@ export default {
 .mylist {
   margin-left: -3rem;
   margin-top: -20%;
+  
 }
 .today {
-  margin-top: -28%;
+  margin-top: -26%;
   margin-left: -5rem;
 }
 .today1 {
@@ -216,4 +246,4 @@ th {
   color: rgb(84, 84, 88);
   font-size: 1.1rem;
 }
-</style>import { data } from "autoprefixer";
+</style>import { data } from "autoprefixer";mapActions, 

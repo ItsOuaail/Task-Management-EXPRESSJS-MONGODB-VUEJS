@@ -1,11 +1,11 @@
-import { createStore } from 'vuex';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { createStore } from "vuex";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const store = createStore({
   state: {
     user: null,
-    tasks: []
+    tasks: [],
   },
   mutations: {
     setUser(state, user) {
@@ -13,30 +13,59 @@ const store = createStore({
     },
     setTasks(state, tasks) {
       state.tasks = tasks;
+    },
+    ADD_TASK(state, task) {
+      state.tasks.push(task);
+    },
+    DELETE_TASK(state, taskId) {
+      state.tasks = state.tasks.filter(task => task._id !== taskId);
     }
   },
   actions: {
     async login({ commit }, credentials) {
-
-        const response = await axios.post('/auth/login', credentials);
-        commit('setUser', response.data.user);
-        Cookies.set('token', response.data.token, { expires: 7 }); // Token expires in 7 days
-        axios.defaults.headers.common['x-auth-token'] = response.data.token;
-        console.log(response)
+      const response = await axios.post("/auth/login", credentials);
+      commit("setUser", response.data.user);
+      Cookies.set("token", response.data.token, { expires: 7 }); // Token expires in 7 days
+      axios.defaults.headers.common["x-auth-token"] = response.data.token;
+      console.log(response);
     },
     async fetchTasks({ commit }) {
-      const response = await axios.get('/tasks');
-      commit('setTasks', response.data);
+      try {
+        const response = await axios.get("/tasks");
+        commit("setTasks", response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Failed to fetch tasks", error);
+      }
+    },
+
+    async addTask ({commit}, taskData) {
+      try {
+        const response = await axios.post("/tasks", taskData);
+        commit('ADD_TASK', response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.error("Failed to add task", error);
+      }
+    },
+    async deleteTask ({commit}, taskId) {
+      try {
+        const response = await axios.delete(`/tasks/${taskId}`);
+        commit('DELETE_TASK', taskId);
+        console.log(response)
+      } catch (error) {
+        console.error("Failed to delete task", error);
+      }
     },
     async signup({ commit }, userData) {
-      const response = await axios.post('/auth/register', userData);
-      commit('setUser', response.data);
-    }
+      const response = await axios.post("/auth/register", userData);
+      commit("setUser", response.data);
+    },
   },
   getters: {
-    isAuthenticated: state => !!state.user,
-    tasks: state => state.tasks
-  }
+    isAuthenticated: (state) => !!state.user,
+    tasks: (state) => state.tasks,
+  },
 });
 
 export default store;
