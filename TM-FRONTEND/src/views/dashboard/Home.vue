@@ -12,9 +12,9 @@
   >
     <div class="today1 max-w-7xl mx-auto px-4 sm:px-6 lg:py-24 lg:px-8">
       <h2
-        class="text-3xl italic tracking-tight text-black sm:text-4xl dark:text-white"
+        class="text-3xl  tracking-tight text-black sm:text-4xl dark:text-white"
       >
-        Tasks :
+      Dashboard :
       </h2>
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-4 mt-4">
         <div
@@ -56,9 +56,9 @@
         <div
           class="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900"
         >
-          <div class="px-4 py-5 sm:p-6">
+          <div onclick="my_modal_4.showModal()" class="cursor-pointer px-4 py-5 sm:p-6">
             <dl>
-              <dt
+              <dt 
                 class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400"
               >
                 Completed
@@ -69,13 +69,17 @@
                 10
               </dd>
             </dl>
+            <!-- Open the modal using ID.showModal() method -->
           </div>
         </div>
       </div>
     </div>
   </div>
+  <dialog id="my_modal_4" class="modal">
+    <completed></completed>
+  </dialog>
   <h2
-    class="mylist text-3xl italic tracking-tight text-black sm:text-4xl dark:text-white"
+    class="mylist text-3xl  tracking-tight text-black sm:text-4xl dark:text-white"
   >
     My list :
   </h2>
@@ -167,13 +171,15 @@ import { mapGetters, mapActions } from "vuex";
 import AddTaskVue from "./AddTask.vue";
 import ConfirmDelete from "./ConfirmDelete.vue";
 import UpdateTaskVue from "./UpdateTask.vue";
+import completed from "./Completed.vue"
 
 export default {
   name: "TaskList",
   components: {
     AddTaskVue,
     ConfirmDelete,
-    UpdateTaskVue
+    UpdateTaskVue,
+    completed
   },
   data() {
     return {

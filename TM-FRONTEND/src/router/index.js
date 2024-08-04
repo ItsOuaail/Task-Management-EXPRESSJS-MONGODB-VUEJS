@@ -3,7 +3,7 @@ import Signup from '../views/Signup.vue'
 import LandingPage from '../views/LandingPage.vue'
 import Confirm from '../views/Confirm.vue'
 import dashboardVue from '@/views/dashboard/dashboard.vue'
-import tasksVue from '@/views/dashboard/tasks.vue'
+import Home from '@/views/dashboard/Home.vue'
 //import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -30,9 +30,9 @@ const router = createRouter({
       component: dashboardVue,
       children: [
         {
-          path: '/tasks',
-          name: 'tasksVue',
-          component: tasksVue,
+          path: '/home',
+          name: 'Home',
+          component: Home,
         }
       ]
     },

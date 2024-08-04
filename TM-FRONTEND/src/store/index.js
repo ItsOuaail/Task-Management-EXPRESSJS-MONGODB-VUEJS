@@ -7,6 +7,7 @@ const store = createStore({
   state: {
     user: null,
     tasks: [],
+    tasksCompleted: []
   },
   mutations: {
     setUser(state, user) {
@@ -14,6 +15,9 @@ const store = createStore({
     },
     setTasks(state, tasks) {
       state.tasks = tasks;
+    },
+    setTasksCompleted(state, tasks) {
+      state.tasksCompleted = tasks;
     },
     ADD_TASK(state, task) {
       state.tasks.push(task);
@@ -45,6 +49,18 @@ const store = createStore({
         console.error("Failed to fetch tasks", error);
       }
     },
+
+    //Get task completed 
+    async fetchTasksCompleted({ commit }) {
+      try {
+        const response = await axios.get("/tasks/completed");
+        commit("setTasksCompleted", response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Failed to fetch tasks", error);
+      }
+    },
+
 
     async addTask ({commit}, taskData) {
       try {
@@ -79,6 +95,7 @@ const store = createStore({
   getters: {
     isAuthenticated: (state) => !!state.user,
     tasks: (state) => state.tasks,
+    tasksCompleted: (state) => state.tasksCompleted,
   },
 });
 

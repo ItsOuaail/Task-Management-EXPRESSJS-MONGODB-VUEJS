@@ -60,7 +60,7 @@
         />
   
         <form  method="dialog" class="inline-flex justify-end gap-4">
-          <button @click="editTask"   class="bg-slate-700 border-slate-700 text-gray-100  btn btn-info " >Add</button>
+          <button @click="editTask"   class="bg-slate-700 border-slate-700 text-gray-100  btn btn-info " >Update</button>
           <button class="btn">Close</button>
       </form>
       </form>
@@ -77,7 +77,7 @@
       async editTask() {
         try {
           await this.$store.dispatch("editTask", this.task);
-          this.$router.push("/tasks"); // Navigate back to task list
+          this.$router.push("/home"); // Navigate back to task list
           this.$emit('task-updated');
         } catch (error) {
           console.error("Failed to edit task:", error);
