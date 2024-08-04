@@ -60,6 +60,25 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
+router.get('/completed', auth, async (req, res) => {
+    try {
+        const tasks = await Task.find({ userId: req.user.id, completed: 'true' });
+        res.status(200).json(tasks);
+    } catch (err) {
+        res.status(500).send('Server error');
+    }
+});
+
+
+router.get('/not-completed', auth, async (req, res) => {
+    try {
+        const tasks = await Task.find({ userId: req.user.id, completed: 'false' });
+        res.status(200).json(tasks);
+    } catch (err) {
+        res.status(500).send('Server error');
+    }
+});
+
 router.put('/:id', auth, async (req, res) => {
     const { title, description, dueDate, priority, completed, category } = req.body;
     try {

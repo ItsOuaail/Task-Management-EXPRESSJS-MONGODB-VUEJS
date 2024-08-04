@@ -50,7 +50,7 @@
             <ul class="mt-6 space-y-2 tracking-wide">
               <li class="min-w-max">
                 <a
-                  href="#"
+                  href="/home"
                   aria-label="dashboard"
                   class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-white"
                 >
@@ -71,7 +71,7 @@
                     </svg>
                   </svg>
                   <span class="group-hover:text-amber-300">
-                    <router-link to="/dashboard">Dashboard</router-link>
+                    <router-link to="/dashboard">Home</router-link>
                   </span>
                 </a>
               </li>

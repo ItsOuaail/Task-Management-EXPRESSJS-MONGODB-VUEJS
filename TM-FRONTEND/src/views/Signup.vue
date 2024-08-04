@@ -162,7 +162,7 @@ export default {
       };
       try {
         await this.login(credentials);
-        this.$router.push("/dashboard");
+        this.$router.push("/home");
         
       } catch (error) {
         this.errorr = error.response.data.error;
