@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Signup from '../views/Signup.vue'
 import LandingPage from '../views/LandingPage.vue'
 import Confirm from '../views/Confirm.vue'
+import dashboardVue from '@/views/dashboard/dashboard.vue'
+import tasksVue from '@/views/dashboard/tasks.vue'
 //import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -21,6 +23,18 @@ const router = createRouter({
       path: '/confirm',
       name: 'Confirm',
       component: Confirm
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboardVue',
+      component: dashboardVue,
+      children: [
+        {
+          path: '/tasks',
+          name: 'tasksVue',
+          component: tasksVue,
+        }
+      ]
     },
     /*{
       path: '/about',

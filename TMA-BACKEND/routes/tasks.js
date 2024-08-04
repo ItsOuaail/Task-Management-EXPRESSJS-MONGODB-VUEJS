@@ -20,12 +20,34 @@ const auth = (req, res, next) => {
 // CRUD Operations
 router.post('/', auth, async (req, res) => {
     const { title, description, dueDate, priority, category } = req.body;
+
+    // Basic validation
+    if (!title) {
+        return res.status(400).json({ error: 'Title is required' });
+    }
+    if (!priority) {
+        return res.status(400).json({ error: 'Priority is required' });
+    }
+    if (!category) {
+        return res.status(400).json({ error: 'Category is required' });
+    }
+
     try {
-        const newTask = new Task({ userId: req.user.id, title, description, dueDate, priority, category });
+        const newTask = new Task({
+            userId: req.user.id,
+            title,
+            description,
+            dueDate,
+            priority,
+            category
+        });
         await newTask.save();
         res.status(201).json(newTask);
     } catch (err) {
-        res.status(500).send('Server error');
+        if (err.name === 'ValidationError') {
+            return res.status(400).json({ error: 'Validation error', details: err.message });
+        }
+        res.status(500).json({ error: 'Server error', details: err.message });
     }
 });
 

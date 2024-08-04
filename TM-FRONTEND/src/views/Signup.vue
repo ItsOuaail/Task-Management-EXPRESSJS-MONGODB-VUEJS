@@ -162,7 +162,7 @@ export default {
       };
       try {
         await this.login(credentials);
-        this.$router.push("/");
+        this.$router.push("/dashboard");
         
       } catch (error) {
         this.errorr = error.response.data.error;
