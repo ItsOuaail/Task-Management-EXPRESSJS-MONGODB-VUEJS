@@ -64,7 +64,7 @@ export default {
             this.$emit('task-added');
         } catch (error) {
         
-        console.error("Signup failed:", error.response );
+        console.error("Adding task failed:", error.response );
       }
     }
   }

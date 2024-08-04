@@ -2,6 +2,9 @@
   <div v-if="showSuccessMessage" class="success-message p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
     <span class="font-medium">Task added successfully!</span>
   </div>
+  <div v-if="showSuccessMessage1" class="success-message p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+    <span class="font-medium">Task updated successfully!</span>
+  </div>
   
   
   <div
@@ -9,7 +12,7 @@
   >
     <div class="today1 max-w-7xl mx-auto px-4 sm:px-6 lg:py-24 lg:px-8">
       <h2
-        class="text-3xl font-extrabold tracking-tight text-black sm:text-4xl dark:text-white"
+        class="text-3xl italic tracking-tight text-black sm:text-4xl dark:text-white"
       >
         Tasks :
       </h2>
@@ -72,7 +75,7 @@
     </div>
   </div>
   <h2
-    class="mylist text-3xl font-extrabold tracking-tight text-black sm:text-4xl dark:text-white"
+    class="mylist text-3xl italic tracking-tight text-black sm:text-4xl dark:text-white"
   >
     My list :
   </h2>
@@ -106,7 +109,7 @@
                   <line x1="18" y1="6" x2="6" y2="18"/>
                   <line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
-                <svg class="h-6 w-6 text-gray-400 cursor-pointer" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg @click="openUpdateModal(task)" class="h-6 w-6 text-gray-400 cursor-pointer" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z"/>
                   <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"/>
                   <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"/>
@@ -147,6 +150,10 @@
       </dialog>
     </div>
   </button>
+  <dialog ref="updateModal" id="my_modal_3" class="modal">
+    <UpdateTaskVue :task="selectedTask" @task-updated="handleTaskUpdated"/>
+  </dialog>
+  
   
   <ConfirmDelete
       v-if="showConfirmDialog"
@@ -159,18 +166,22 @@
 import { mapGetters, mapActions } from "vuex";
 import AddTaskVue from "./AddTask.vue";
 import ConfirmDelete from "./ConfirmDelete.vue";
+import UpdateTaskVue from "./UpdateTask.vue";
 
 export default {
   name: "TaskList",
   components: {
     AddTaskVue,
     ConfirmDelete,
+    UpdateTaskVue
   },
   data() {
     return {
       showSuccessMessage: false,
+      showSuccessMessage1: false,
       showConfirmDialog: false,
       taskToDelete: null,
+      selectedTask: null
     };
   },
   computed: {
@@ -180,10 +191,23 @@ export default {
     this.$store.dispatch("fetchTasks");
   },
   methods: {
+    openUpdateModal(task) {
+      this.selectedTask = task;
+      const modal = this.$refs.updateModal;
+      if (modal) {
+        modal.showModal();
+      }
+    },
     handleTaskAdded() {
       this.showSuccessMessage = true;
       setTimeout(() => {
         this.showSuccessMessage = false;
+      }, 3000); // Hide the message after 3 seconds
+    },
+    handleTaskUpdated() {
+      this.showSuccessMessage1 = true;
+      setTimeout(() => {
+        this.showSuccessMessage1 = false;
       }, 3000); // Hide the message after 3 seconds
     },
     ...mapActions(['deleteTask']),
@@ -207,6 +231,7 @@ export default {
   }
 };
 </script>
+
 
 
 
@@ -246,4 +271,5 @@ th {
   color: rgb(84, 84, 88);
   font-size: 1.1rem;
 }
-</style>import { data } from "autoprefixer";mapActions, 
+</style>import { data } from "autoprefixer";mapActions, import UpdateTaskVue from "./UpdateTask.vue";
+
