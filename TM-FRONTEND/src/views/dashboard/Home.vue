@@ -25,12 +25,12 @@
               <dt
                 class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400"
               >
-                Today
+                <a href="/tasks">Tasks</a>
               </dt>
               <dd
                 class="mt-1 text-3xl leading-9 font-semibold text-indigo-600 dark:text-indigo-400"
               >
-                3
+              {{ tasksNotCompleted.length }}
               </dd>
             </dl>
           </div>
@@ -66,7 +66,7 @@
               <dd
                 class="mt-1 text-3xl leading-9 font-semibold text-indigo-600 dark:text-indigo-400"
               >
-                10
+                {{ tasksCompleted.length }}
               </dd>
             </dl>
             <!-- Open the modal using ID.showModal() method -->
@@ -192,9 +192,13 @@ export default {
   },
   computed: {
     ...mapGetters(["tasks"]),
+    ...mapGetters(["tasksCompleted"]),
+    ...mapGetters(["tasksNotCompleted"])
   },
   created() {
     this.$store.dispatch("fetchTasks");
+    this.$store.dispatch("fetchTasksCompleted");
+    this.$store.dispatch("fetchTasksNotCompleted");
   },
   methods: {
     openUpdateModal(task) {
