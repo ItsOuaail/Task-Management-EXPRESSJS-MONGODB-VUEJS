@@ -4,6 +4,7 @@ import LandingPage from '../views/LandingPage.vue'
 import Confirm from '../views/Confirm.vue'
 import dashboardVue from '@/views/dashboard/dashboard.vue'
 import Home from '@/views/dashboard/Home.vue'
+import Tasks from '@/views/dashboard/tasks.vue'
 //import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -33,6 +34,11 @@ const router = createRouter({
           path: '/home',
           name: 'Home',
           component: Home,
+        },
+        {
+          path: '/tasks',
+          name: 'Tasks',
+          component: Tasks,
         }
       ]
     },

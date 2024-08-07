@@ -7,7 +7,8 @@ const store = createStore({
   state: {
     user: null,
     tasks: [],
-    tasksCompleted: []
+    tasksCompleted: [],
+    tasksNotCompleted: []
   },
   mutations: {
     setUser(state, user) {
@@ -19,8 +20,14 @@ const store = createStore({
     setTasksCompleted(state, tasks) {
       state.tasksCompleted = tasks;
     },
+    setTasksNotCompleted(state, tasks) {
+      state.tasksNotCompleted = tasks;
+    },
     ADD_TASK(state, task) {
       state.tasks.push(task);
+    },
+    ADD_TASK_NOTC(state, task) {
+      state.tasksNotCompleted.push(task);
     },
     DELETE_TASK(state, taskId) {
       state.tasks = state.tasks.filter(task => task._id !== taskId);
@@ -50,6 +57,16 @@ const store = createStore({
       }
     },
 
+    async completeTask({ commit }, taskId) {
+      try {
+        const response = await axios.patch(`/tasks/${taskId}/complete`);
+        commit('updateTask', response.data);
+      } catch (error) {
+        console.error('Failed to complete task:', error);
+      }
+    },
+
+
     //Get task completed 
     async fetchTasksCompleted({ commit }) {
       try {
@@ -61,23 +78,35 @@ const store = createStore({
       }
     },
 
+    //Get task not completed 
+    async fetchTasksNotCompleted({ commit }) {
+      try {
+        const response = await axios.get("/tasks/not-completed");
+        commit("setTasksNotCompleted", response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Failed to fetch tasks", error);
+      }
+    },
 
+//   add task
     async addTask ({commit}, taskData) {
       try {
         const response = await axios.post("/tasks", taskData);
         commit('ADD_TASK', response.data);
+        commit('ADD_TASK_NOTC', response.data);
         console.log(response.data)
       } catch (error) {
         console.error("Failed to add task", error);
       }
     },
-
+//  update task
     async editTask({ commit }, task) {
       const response = await axios.put(`/tasks/${task._id}`, task);
       console.log(response.data);
       commit('updateTask', response.data);
   },
-
+//  delete task
     async deleteTask ({commit}, taskId) {
       try {
         const response = await axios.delete(`/tasks/${taskId}`);
@@ -96,6 +125,7 @@ const store = createStore({
     isAuthenticated: (state) => !!state.user,
     tasks: (state) => state.tasks,
     tasksCompleted: (state) => state.tasksCompleted,
+    tasksNotCompleted: (state) => state.tasksNotCompleted,
   },
 });
 

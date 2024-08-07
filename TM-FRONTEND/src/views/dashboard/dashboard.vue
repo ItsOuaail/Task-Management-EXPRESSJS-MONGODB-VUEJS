@@ -71,7 +71,7 @@
                     </svg>
                   </svg>
                   <span class="group-hover:text-amber-300">
-                    <router-link to="/dashboard">Home</router-link>
+                    <router-link to="/home">Home</router-link>
                   </span>
                 </a>
               </li>

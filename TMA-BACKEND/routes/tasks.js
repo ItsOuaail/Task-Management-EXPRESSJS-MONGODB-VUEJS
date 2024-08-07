@@ -17,6 +17,25 @@ const auth = (req, res, next) => {
     }
 };
 
+// Mark task as completed
+router.patch('/:id/complete', auth, async (req, res) => {
+    try {
+        const task = await Task.findById(req.params.id);
+        if (!task) {
+            return res.status(404).send({ error: 'Task not found' });
+        }
+
+        if (task.userId.toString() !== req.user.id) {
+            return res.status(403).send({ error: 'Unauthorized' });
+        }
+
+        task.completed = true;
+        await task.save();
+        res.status(200).json(task);
+    } catch (err) {
+        res.status(500).send({ error: 'Server error', details: err.message });
+    }
+});
 // CRUD Operations
 router.post('/', auth, async (req, res) => {
     const { title, description, dueDate, priority, category } = req.body;
